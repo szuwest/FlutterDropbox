@@ -504,7 +504,7 @@ public class DropboxPlugin implements FlutterPlugin, MethodCallHandler, Activity
 
             }
           });
-
+          return "success";
         } catch (FileNotFoundException e) {
           e.printStackTrace();
           return e.getMessage();
@@ -515,13 +515,18 @@ public class DropboxPlugin implements FlutterPlugin, MethodCallHandler, Activity
         return e.getMessage();
         }
 
-      return "";
+      return "fail";
     }
 
     @Override
     protected void onPostExecute(String r) {
       super.onPostExecute(r);
-      result.success(paths);
+      Log.d("UploadTask", r);
+      if (r.equals("success")) {
+        result.success(true);
+      } else {
+        result.success(false);
+      }
     }
 
   }
@@ -568,10 +573,9 @@ public class DropboxPlugin implements FlutterPlugin, MethodCallHandler, Activity
                 channel.invokeMethod("progress", ret, null);
               }
             });
-
           }
         });
-
+        return "success";
       } catch (FileNotFoundException e) {
         e.printStackTrace();
         return e.getMessage();
@@ -583,13 +587,18 @@ public class DropboxPlugin implements FlutterPlugin, MethodCallHandler, Activity
         return e.getMessage();
       }
 
-      return "";
+      return "fail";
     }
 
       @Override
     protected void onPostExecute(String r) {
+      Log.d("DownloadTask", r);
       super.onPostExecute(r);
-      result.success(paths);
+      if (r.equals("success")) {
+        result.success(true);
+      } else {
+        result.success(false);
+      }
     }
 
   }
