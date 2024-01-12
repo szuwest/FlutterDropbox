@@ -523,9 +523,9 @@ public class DropboxPlugin implements FlutterPlugin, MethodCallHandler, Activity
       super.onPostExecute(r);
       Log.d("UploadTask", r);
       if (r.equals("success")) {
-        result.success(true);
+        result.success(1);
       } else {
-        result.success(false);
+        result.success(0);
       }
     }
 
@@ -595,9 +595,9 @@ public class DropboxPlugin implements FlutterPlugin, MethodCallHandler, Activity
       Log.d("DownloadTask", r);
       super.onPostExecute(r);
       if (r.equals("success")) {
-        result.success(true);
+        result.success(1);
       } else {
-        result.success(false);
+        result.success(0);
       }
     }
 
