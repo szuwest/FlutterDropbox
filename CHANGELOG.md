@@ -1,3 +1,10 @@
+## 1.2.0 (2025/04/02)
+* update Dropbox SDK (7.0.0)
+* update to latest Android SDK (35)
+
+## 1.1.2 (2025/03/18)
+* Android: Migration to Flutter Embedding V2. contributed by https://github.com/MishaKomar
+
 ## 1.1.1  (2023/11/24)
 * add support of profilePhotoUrl to getCurrentAccount(). contributed by https://github.com/xvadim
 
