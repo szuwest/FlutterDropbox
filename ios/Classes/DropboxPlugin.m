@@ -72,12 +72,18 @@ FlutterMethodChannel* channel;
 
   } else if ([@"authorize" isEqualToString:call.method]) {
 
-      [DBClientsManager authorizeFromController:[UIApplication sharedApplication]
-                                     controller:[[self class] topMostController]
-                                        openURL:^(NSURL *url) {
-                                          NSLog(@"url = %@" , [url absoluteString]);
-                                          [[UIApplication sharedApplication] openURL:url];
-                                        }];
+      DBScopeRequest *scop = [[DBScopeRequest alloc] initWithScopeType:DBScopeTypeUser
+                                                                scopes:@[@"files.metadata.read",
+                                                                         @"files.content.read",@"files.metadata.write",@"files.content.write"]
+                                                  includeGrantedScopes:NO];
+      [DBClientsManager authorizeFromControllerV2:[UIApplication sharedApplication]
+                                           controller:[[self class] topMostController]
+                                loadingStatusDelegate:nil
+                                              openURL:^(NSURL *url) {
+          NSLog(@"url = %@" , [url absoluteString]);
+          [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+          }
+                                     scopeRequest:scop];
       result([NSNumber numberWithBool:TRUE]);
       
   } else if ([@"getAuthorizeUrl" isEqualToString:call.method]) {
